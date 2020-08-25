@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://igli123:igli123@bookmanager.jb3zq.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret": "secret"
+}
