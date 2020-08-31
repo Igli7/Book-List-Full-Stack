@@ -1,0 +1,30 @@
+import React from 'react';
+import '../../App.css';
+import Books from '../books/Books';
+import BookForm from '../books/BookForm';
+import DeleteDialog from '../dialog/DeleteDialog';
+import BookContext from '../../context/book/bookContext';
+import { useContext } from 'react';
+
+const Home = () => {
+  const bookContext = useContext(BookContext);
+
+  const { showDialog } = bookContext;
+
+  return (
+    <div className='form'>
+      {showDialog && <DeleteDialog />}
+      <h1>Add a Book</h1>
+
+      <div>
+        <BookForm />
+      </div>
+
+      <div>
+        <Books />
+      </div>
+    </div>
+  );
+};
+
+export default Home;
