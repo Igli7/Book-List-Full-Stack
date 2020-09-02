@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Yellowtail&display=swap");
 * {
   font-family: sans-serif;
   padding: 0;
@@ -40,7 +40,7 @@
 }
 
 .nav .logo span {
-  font-family: 'Yellowtail', cursive;
+  font-family: "Yellowtail", cursive;
   color: #00c896;
 }
 
@@ -71,7 +71,7 @@
   text-decoration: none;
 }
 .nav ul li a::before {
-  content: '';
+  content: "";
   top: 10px;
   width: 7px;
   height: 7px;
@@ -161,7 +161,7 @@
 }
 
 #book-form label::after {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 100%;
@@ -242,14 +242,7 @@
   font-weight: 600;
   cursor: pointer;
   border-radius: 5px;
-  background-image: radial-gradient(
-    circle,
-    #00c896,
-    #66cd9b,
-    #91d1a5,
-    #b1d5b4,
-    #cbdac7
-  );
+  background-image: radial-gradient(circle, #00c896, #66cd9b, #91d1a5, #b1d5b4, #cbdac7);
 }
 
 #book-form .btn .button:focus {
@@ -547,13 +540,13 @@
   min-width: 50%;
   max-width: 50%;
   font-size: 0.8em;
-  padding: 0.5em ;
+  padding: 0.5em;
 }
 .profile-box .addDate textarea {
   min-width: 80%;
   max-width: 80%;
   font-size: 1.2em;
-  padding: 0.5em ;
+  padding: 0.5em;
 }
 
 .profile-box .addDescription textarea {
@@ -588,12 +581,106 @@
 .profile-box .confirm:hover {
   background-color: rgb(108, 211, 161);
   color: white;
-  border: none;
+  border-color: white;
 }
 .profile-box .cancle:hover {
   background-color: rgba(255, 0, 0);
-  border: none;
+  border-color: white;
 }
 .profile-box .editTwo {
   color: green;
+}
+
+/* Search Form */
+
+.searchForm {
+  padding-top: 4em;
+  padding-bottom: 3em;
+  position: relative;
+}
+
+.searchForm #search {
+  position: absolute;
+  transition: all 1s;
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  border-radius: 25px;
+  border: 4px solid #00c896;
+  padding: 5px;
+  right: 0;
+  z-index: 97;
+  background-color: transparent;
+}
+
+.searchForm #search input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 42.5px;
+  line-height: 30px;
+  outline: 0;
+  border: 0;
+  display: none;
+  font-size: 1em;
+  border-radius: 20px;
+  padding: 0 20px;
+  z-index: 99;
+}
+
+.searchForm #search i {
+  width: 42.5px;
+  height: 42.5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-size: 1.2em;
+  transition: all 1s;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00c896;
+}
+
+#search:hover {
+  width: 100%;
+  cursor: pointer;
+}
+
+#search:hover input {
+  display: block;
+}
+
+#search:hover .fa {
+  color: #00c896;
+  background-color: white;
+}
+
+#search.active {
+  width: 100%;
+  background-color: white;
+}
+.fa-search.active {
+  color: #00c896 !important;
+  background-color: white !important;
+}
+
+.searchForm #search input.active {
+  z-index: 99;
+  display: block;
+}
+
+
+@media (min-width: 740px) {
+  #search:hover {
+    width: 60%;
+  }
+  #search.active {
+    width: 60%;
+  }
 }

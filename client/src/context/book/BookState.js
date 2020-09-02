@@ -45,6 +45,7 @@ const BookState = (props) => {
     ],
     current: null,
     showDialog: null,
+    filtered: null,
   };
 
   const [state, dispatch] = useReducer(bookReducer, initialState);
@@ -106,6 +107,13 @@ const BookState = (props) => {
 
   //Filter Books,
 
+  const filterBooks = (text) => {
+    dispatch({
+      type: FILTER_BOOKS,
+      payload: text,
+    });
+  };
+
   //Clear Filter
 
   return (
@@ -114,6 +122,7 @@ const BookState = (props) => {
         books: state.books,
         showDialog: state.showDialog,
         current: state.current,
+        filtered: state.filtered,
         addBook,
         deleteBook,
         setDialog,
@@ -121,6 +130,7 @@ const BookState = (props) => {
         setCurrent,
         clearCurrent,
         updateBook,
+        filterBooks,
       }}
     >
       {props.children}
