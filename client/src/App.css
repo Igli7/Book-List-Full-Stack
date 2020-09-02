@@ -543,17 +543,57 @@
   line-height: 45px;
 }
 
-.profile-box h3 textarea{
-  line-height: 38px;
+.profile-box h3 textarea {
   min-width: 50%;
   max-width: 50%;
   font-size: 0.8em;
+  padding: 0.5em ;
 }
-.profile-box .addDescription textarea{
+.profile-box .addDate textarea {
+  min-width: 80%;
+  max-width: 80%;
+  font-size: 1.2em;
+  padding: 0.5em ;
+}
+
+.profile-box .addDescription textarea {
   min-width: 100%;
   max-width: 100%;
-  min-height: 200px;
+  min-height: 80px;
   text-align: left;
   padding-left: 0.5em;
-  line-height: 50px;
+  padding-top: 0.5em;
+}
+
+.profile-box .confirm,
+.profile-box .cancle {
+  top: auto;
+  bottom: 20px !important;
+  padding: 1.3em 3.2em;
+  color: #333333;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.profile-box .cancle {
+  right: 25px;
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+}
+.profile-box .confirm {
+  right: auto;
+  left: auto;
+  right: 145px;
+  background-color: rgba(102, 205, 155, 0.8);
+}
+
+.profile-box .confirm:hover {
+  background-color: rgb(108, 211, 161);
+  color: white;
+  border: none;
+}
+.profile-box .cancle:hover {
+  background-color: rgba(255, 0, 0);
+  border: none;
+}
+.profile-box .editTwo {
+  color: green;
 }

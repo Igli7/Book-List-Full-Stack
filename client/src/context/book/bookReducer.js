@@ -8,10 +8,6 @@ import {
   CLEAR_FILTER,
   SET_DIALOG,
   CLEAR_DIALOG,
-  SET_DIALOG_TITLE,
-  SET_DIALOG_ID,
-  SET_UPDATE,
-  CLEAR_UPDATE,
 } from '../types';
 
 export default (state, action) => {
@@ -43,24 +39,21 @@ export default (state, action) => {
     case SET_DIALOG:
       return {
         ...state,
-        showDialog: true,
+        showDialog: action.payload,
       };
 
     case CLEAR_DIALOG:
       return {
         ...state,
-        showDialog: false,
+        showDialog: null,
       };
 
-    case SET_UPDATE:
+    case UPDATE_BOOK:
       return {
         ...state,
-        showUpdate: true,
-      };
-    case CLEAR_UPDATE:
-      return {
-        ...state,
-        showUpdate: false,
+        books: state.books.map((book) =>
+          book.id === action.payload.id ? action.payload : book
+        ),
       };
 
     default:

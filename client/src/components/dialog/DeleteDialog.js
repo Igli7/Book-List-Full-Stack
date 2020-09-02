@@ -4,7 +4,7 @@ import BookContext from '../../context/book/bookContext';
 const DeleteDialog = () => {
   const bookContext = useContext(BookContext);
 
-  const { clearDialog, deleteBook, current } = bookContext;
+  const { clearDialog, deleteBook, showDialog } = bookContext;
 
   const [title, setTitle] = useState({
     titleInput: '',
@@ -20,13 +20,13 @@ const DeleteDialog = () => {
   };
 
   const onDelete = () => {
-    deleteBook(current.id);
+    deleteBook(showDialog.id);
     clearDialog();
   };
 
 
   const noMatch =
-    titleInput !== current.title.split(' ').join('').toLowerCase();
+    titleInput !== showDialog.title.split(' ').join('').toLowerCase();
 
   return (
     <Fragment>
@@ -36,7 +36,7 @@ const DeleteDialog = () => {
         <p>
           This action <b style={{ color: 'red' }}>CANNOT</b> be undone!
           <span>
-            Type <b>{current.title.split(' ').join('').toLowerCase()} </b>to
+            Type <b>{showDialog.title.split(' ').join('').toLowerCase()} </b>to
             confirm.
           </span>
         </p>

@@ -13,8 +13,6 @@ import {
   CLEAR_FILTER,
   SET_DIALOG,
   CLEAR_DIALOG,
-  SET_UPDATE,
-  CLEAR_UPDATE,
 } from '../types';
 
 const BookState = (props) => {
@@ -22,8 +20,7 @@ const BookState = (props) => {
     books: [
       {
         id: '1',
-        title:
-          'Book 1',
+        title: 'Book 1',
         author: 'Author 1',
         isbn: '1234567890123',
         date: '10/12/2018',
@@ -47,8 +44,7 @@ const BookState = (props) => {
       },
     ],
     current: null,
-    showDialog: false,
-    showUpdate: false,
+    showDialog: null,
   };
 
   const [state, dispatch] = useReducer(bookReducer, initialState);
@@ -78,9 +74,10 @@ const BookState = (props) => {
   };
 
   // Set Dialog
-  const setDialog = () => {
+  const setDialog = (title) => {
     dispatch({
       type: SET_DIALOG,
+      payload: title,
     });
   };
 
@@ -99,23 +96,13 @@ const BookState = (props) => {
     });
   };
 
-  // Set Update
-  const setUpdate = () => {
-    dispatch({
-      type: SET_UPDATE,
-    });
-  };
-
-  //Clear Dialog
-  const clearUpdate = () => {
-    dispatch({
-      type: CLEAR_UPDATE,
-    });
-  };
-
-  //Clear Current Book,
-
   //Update Book,
+  const updateBook = (book) => {
+    dispatch({
+      type: UPDATE_BOOK,
+      payload: book,
+    });
+  };
 
   //Filter Books,
 
@@ -127,15 +114,13 @@ const BookState = (props) => {
         books: state.books,
         showDialog: state.showDialog,
         current: state.current,
-        showUpdate: state.showUpdate,
         addBook,
         deleteBook,
         setDialog,
         clearDialog,
         setCurrent,
         clearCurrent,
-        setUpdate,
-        clearUpdate,
+        updateBook,
       }}
     >
       {props.children}
