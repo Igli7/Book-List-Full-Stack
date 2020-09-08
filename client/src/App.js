@@ -6,6 +6,7 @@ import NavBar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import BookState from './context/book/BookState';
+import LandingPage from './components/pages/LandingPage'
 
 const App = () => {
   return (
@@ -13,10 +14,11 @@ const App = () => {
       <Router>
         <Fragment>
         
-          <NavBar />
+          {/* <NavBar /> */}
           <div className='bookForm'>
             <Switch>
               <Route exact path='/' component={Home} />
+              <Route exact path='/landing' component={LandingPage} />
               <Route exact path='/about' component={About} />
             </Switch>
           </div>

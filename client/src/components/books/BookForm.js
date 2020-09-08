@@ -49,7 +49,7 @@ const BookForm = () => {
         <label htmlFor='title' className='labelName'>
           <span className='contentName'>Title</span>
         </label>
-      </div>
+      </div> 
       <div className='text'>
         <input
           type='text'
