@@ -4,7 +4,7 @@ import Books from '../books/Books';
 import BookForm from '../books/BookForm';
 import DeleteDialog from '../dialog/DeleteDialog';
 import BookContext from '../../context/book/bookContext';
-import SearchForm from '../books/BookFilter';
+import BookFilter from '../books/BookFilter';
 import { useContext } from 'react';
 
 const Home = () => {
@@ -21,7 +21,7 @@ const Home = () => {
         <BookForm />
       </div>
       <div style={{ display: 'block' }}>
-        <SearchForm />
+        <BookFilter />
       </div>
       <div>
         <Books />

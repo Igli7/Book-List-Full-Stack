@@ -1,14 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import BookContext from '../../context/book/bookContext';
 
 const BookFilter = () => {
   const bookContext = useContext(BookContext);
 
-  const { filterBooks } = bookContext;
+  const { filterBooks, clearFilter, filtered } = bookContext;
 
   const [state, setState] = useState({
     active: '',
-    text: '',
   });
 
   const onClick = () => {
@@ -17,13 +16,26 @@ const BookFilter = () => {
     });
   };
 
+  const text = useRef('');
+
+  useEffect(()=> {
+    if(filtered === null){
+      text.current.value = '';
+    }
+  })
+
   const onChange = (e) => {
     setState({
-      text: e.target.value,
       active: 'active',
     });
 
-    filterBooks(state.text);
+    if(text.current.value !== ''){
+      filterBooks(e.target.value);
+    } else{
+      clearFilter();
+    }
+
+    
   };
 
   console.log(state.text);
@@ -34,6 +46,7 @@ const BookFilter = () => {
           <input
             onChange={onChange}
             type='search'
+            ref={text}
             className={'searchInput ' + state.active}
             placeholder='Search Title'
           />

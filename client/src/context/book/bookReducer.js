@@ -56,6 +56,23 @@ export default (state, action) => {
         ),
       };
 
+      case FILTER_BOOKS:
+        return{
+          ...state,
+          filtered: state.books.filter(book => {
+            const regex = new RegExp(`${action.payload}`, 'gi');
+            return book.title.match(regex) || book.author.match(regex) || book.isbn.match(regex)
+          })
+        }
+
+        case CLEAR_FILTER:
+          return{
+            ...state,
+            filtered: null
+          }
+
+
+
     
 
     default:

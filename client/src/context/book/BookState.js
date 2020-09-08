@@ -48,6 +48,7 @@ const BookState = (props) => {
     filtered: null,
   };
 
+
   const [state, dispatch] = useReducer(bookReducer, initialState);
 
   // Add book
@@ -116,6 +117,12 @@ const BookState = (props) => {
 
   //Clear Filter
 
+  const clearFilter = () => {
+    dispatch({
+      type: CLEAR_FILTER,
+    });
+  };
+
   return (
     <BookContext.Provider
       value={{
@@ -131,6 +138,7 @@ const BookState = (props) => {
         clearCurrent,
         updateBook,
         filterBooks,
+        clearFilter
       }}
     >
       {props.children}
