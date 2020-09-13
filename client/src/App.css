@@ -8,17 +8,15 @@
 
 .bookForm {
   width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   background-color: #faf8ff;
-  overflow-x: hidden;
 }
 
 /* Navbar */
 
 .nav {
-  width: 100%;
+  width: 100vw;
   position: fixed;
   z-index: 99;
   height: 60px;
@@ -735,16 +733,99 @@
 
 .landingLogo {
   font-size: 5em;
-                font-weight:500;
-                letter-spacing: 2px;
-                color:white;
-                font-family: cursive;
-                padding-left: 0;
+  font-weight:500;
+  letter-spacing: 2px;
+  color:white;
+  font-family: cursive;
+  padding-left: 0;
                 
 }
 
 @media (max-width: 650px) {
   .landingLogo{
     font-size: 4em !important;
+  }
+}
+
+.landingContainer h4{
+  color: white;
+  font-size: 1.8em;
+  padding-top: 2em;
+  letter-spacing: 2px;
+  font-weight: 300;
+  padding-top: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  line-height: 42px;
+}
+.landingContainer p {
+  color: white;
+  letter-spacing: 1px;
+  padding-top: 2em;
+  font-weight: 600;
+}
+
+.landingContainer .buttons{
+  padding-top: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5em;
+}
+
+.landingContainer .buttons .button {
+  color: white;
+  text-decoration: none;
+  
+  border-radius: 20px;
+  position: relative;
+  transition: all 2s ease;
+}
+
+.landingContainer .buttons .loginButton {
+  border: 1px solid #1F6074;
+  padding: 1.5em 2.5em;
+}
+.landingContainer .buttons .signupButton{
+  border: 1px solid rgba(0, 199, 149, 0.5) ;
+  padding: 1.5em 2.2em;
+}
+
+.landingContainer .buttons .button::after {
+  content: '';
+  width: 0px;
+  position: absolute;
+  z-index: 10;
+  border-radius: 20px;
+  left: 50%;
+  top: 0px;
+  height: 100%;
+  transition: all 550ms ease;
+}
+
+.landingContainer .buttons .loginButton::after{
+  background-image: linear-gradient(to right top, #1f6074, #19687b, #127182, #087987, #00828c);
+}
+.landingContainer .buttons .signupButton::after{
+  background-image: linear-gradient(to right top, #00c896, #00c299, #00bc9b, #00b59c, #00af9c);
+}
+
+.landingContainer .buttons .button:hover::after{
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+}
+
+@media (max-width: 400px) {
+  .landingContainer .buttons{
+    flex-direction: column;
+    gap: 2em;
+    width: 100%;
+    padding: 2em 1em;
+  }
+
+  .landingContainer .buttons .button{
+    width: 100%;
   }
 }

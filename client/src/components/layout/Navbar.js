@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 
 const Navbar = () => {
+
+  let location = useLocation();
+  console.log(location.pathname);
+
+  
   return (
-    <nav className='nav'>
+    <Fragment>
+    { location.pathname !== '/' && <nav className='nav'>
       <div>
         <a href='/' className='logo'>
           <i className='fas fa-book-open' />
@@ -20,7 +27,9 @@ const Navbar = () => {
           <Link to='/about'>About</Link>
         </li>
       </ul>
-    </nav>
+    </nav>}
+    
+    </Fragment>
   );
 };
 

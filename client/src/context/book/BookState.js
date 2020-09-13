@@ -13,6 +13,8 @@ import {
   CLEAR_FILTER,
   SET_DIALOG,
   CLEAR_DIALOG,
+  SHOW_NAV
+  
 } from '../types';
 
 const BookState = (props) => {
@@ -46,6 +48,7 @@ const BookState = (props) => {
     current: null,
     showDialog: null,
     filtered: null,
+    showNav: true,
   };
 
 
@@ -123,6 +126,15 @@ const BookState = (props) => {
     });
   };
 
+  const navBar = (text) => {
+    dispatch({
+      type: SHOW_NAV,
+      payload: text,
+    });
+  };
+
+  // Show Nav 
+
   return (
     <BookContext.Provider
       value={{
@@ -130,6 +142,7 @@ const BookState = (props) => {
         showDialog: state.showDialog,
         current: state.current,
         filtered: state.filtered,
+        showNav: state.showNav,
         addBook,
         deleteBook,
         setDialog,
@@ -138,7 +151,8 @@ const BookState = (props) => {
         clearCurrent,
         updateBook,
         filterBooks,
-        clearFilter
+        clearFilter,
+        navBar
       }}
     >
       {props.children}

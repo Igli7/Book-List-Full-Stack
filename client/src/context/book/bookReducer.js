@@ -8,6 +8,7 @@ import {
   CLEAR_FILTER,
   SET_DIALOG,
   CLEAR_DIALOG,
+  SHOW_NAV,
 } from '../types';
 
 export default (state, action) => {
@@ -70,6 +71,12 @@ export default (state, action) => {
             ...state,
             filtered: null
           }
+
+          case SHOW_NAV:
+      return {
+        ...state,
+        showNav: action.payload,
+      };
 
 
 

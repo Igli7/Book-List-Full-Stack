@@ -14,11 +14,17 @@ const App = () => {
       <Router>
         <Fragment>
         
-          {/* <NavBar /> */}
+        
           <div className='bookForm'>
             <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/landing' component={LandingPage} />
+            <Route exact path='/' component={LandingPage} />
+              
+            </Switch>
+
+            <NavBar /> 
+            <Switch>
+            
+              <Route exact path='/home' component={Home} />
               <Route exact path='/about' component={About} />
             </Switch>
           </div>
