@@ -6,11 +6,16 @@
   box-sizing: border-box;
 }
 
+body{
+  overflow-x: hidden;
+}
+
 .bookForm {
   width: 100vw;
   display: flex;
   justify-content: center;
   background-color: #faf8ff;
+  overflow-x: hidden;
 }
 
 /* Navbar */
@@ -673,7 +678,6 @@
   display: block;
 }
 
-
 @media (min-width: 740px) {
   #search:hover {
     width: 60%;
@@ -683,32 +687,42 @@
   }
 }
 
-
-
 /* Landing Page */
 
-.landingContainer {
-  width: 100vw;
+.cont{
   height: 100vh;
+  width: 100vw;
+}
+
+.landingContainer {
+  width: 100%;
+  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: red;
   padding-top: 3em;
+  padding-bottom: 3em;
+  z-index: 10;
 }
+
+
 .landingContainer .videoContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: url('./photo/photo.PNG') no-repeat center center/cover ;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translate(-50%, -50%);
+  background: url("./photo/photo.PNG") no-repeat center center/cover;
 }
-.landingContainer .videoContainer::after{
-  content: '';
+.landingContainer .videoContainer::after {
+  content: "";
   width: 100%;
   height: 100%;
   top: 0;
@@ -717,37 +731,37 @@
   background-color: black;
   opacity: 0.65;
 }
-.landingContainer .videoContainer video{
- min-width: 100%;
- min-height: 100%;
- object-fit: cover;
- position: absolute;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
+.landingContainer .videoContainer video,
+.landingContainer .videoContainer img {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.landingContainer .content{
+.landingContainer .content {
   z-index: 10;
 }
 
 .landingLogo {
   font-size: 5em;
-  font-weight:500;
+  font-weight: 500;
   letter-spacing: 2px;
-  color:white;
+  color: white;
   font-family: cursive;
   padding-left: 0;
-                
 }
 
 @media (max-width: 650px) {
-  .landingLogo{
+  .landingLogo {
     font-size: 4em !important;
   }
 }
 
-.landingContainer h4{
+.landingContainer h4 {
   color: white;
   font-size: 1.8em;
   padding-top: 2em;
@@ -765,34 +779,35 @@
   font-weight: 600;
 }
 
-.landingContainer .buttons{
+.landingContainer .buttons {
   padding-top: 4em;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5em;
+  padding-bottom: 2em;
 }
 
 .landingContainer .buttons .button {
   color: white;
   text-decoration: none;
-  
+
   border-radius: 20px;
   position: relative;
   transition: all 2s ease;
 }
 
 .landingContainer .buttons .loginButton {
-  border: 1px solid #1F6074;
+  border: 1px solid #1f6074;
   padding: 1.5em 2.5em;
 }
-.landingContainer .buttons .signupButton{
-  border: 1px solid rgba(0, 199, 149, 0.5) ;
+.landingContainer .buttons .signupButton {
+  border: 1px solid rgba(0, 199, 149, 0.5);
   padding: 1.5em 2.2em;
 }
 
 .landingContainer .buttons .button::after {
-  content: '';
+  content: "";
   width: 0px;
   position: absolute;
   z-index: 10;
@@ -803,14 +818,14 @@
   transition: all 550ms ease;
 }
 
-.landingContainer .buttons .loginButton::after{
+.landingContainer .buttons .loginButton::after {
   background-image: linear-gradient(to right top, #1f6074, #19687b, #127182, #087987, #00828c);
 }
-.landingContainer .buttons .signupButton::after{
+.landingContainer .buttons .signupButton::after {
   background-image: linear-gradient(to right top, #00c896, #00c299, #00bc9b, #00b59c, #00af9c);
 }
 
-.landingContainer .buttons .button:hover::after{
+.landingContainer .buttons .button:hover::after {
   left: 0;
   width: 100%;
   height: 100%;
@@ -818,14 +833,55 @@
 }
 
 @media (max-width: 400px) {
-  .landingContainer .buttons{
+  .landingContainer .buttons {
     flex-direction: column;
     gap: 2em;
     width: 100%;
     padding: 2em 1em;
+    overflow-x: hidden;
   }
 
-  .landingContainer .buttons .button{
+  .landingContainer .buttons .button {
     width: 100%;
   }
+}
+
+/* Register Form */
+.registerForm {
+  width: 500px;
+  z-index: 10;
+  border: 0.1px solid rgba(255, 255, 255,0.35);
+  padding: 2em;
+  padding-bottom: 3em;
+  border-radius: 20px;
+  padding-bottom: 2em;
+}
+
+@media(max-width: 540px){
+  .registerForm{
+    width: 90%;
+  }
+}
+.registerForm h1 {
+  font-size: 3em;
+  padding-top: 0.5em;
+  color: white;
+}
+.registerForm .text input {
+  background-color: transparent !important;
+  color: white;
+}
+
+
+input:-webkit-autofill {
+  transition: all 0s 50000000s;
+}
+
+.registerForm p{
+  font-weight: 300;
+  text-align: left;
+}
+.registerForm p .link {
+  text-decoration: none;
+  color: #00c299;
 }

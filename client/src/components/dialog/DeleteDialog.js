@@ -24,7 +24,6 @@ const DeleteDialog = () => {
     clearDialog();
   };
 
-
   const noMatch =
     titleInput !== showDialog.title.split(' ').join('').toLowerCase();
 
@@ -63,7 +62,6 @@ const DeleteDialog = () => {
           </button>
         </div>
       </div>
-      
     </Fragment>
   );
 };

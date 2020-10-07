@@ -10,18 +10,18 @@ const Navbar = () => {
   
   return (
     <Fragment>
-    { location.pathname !== '/' && <nav className='nav'>
+    { (location.pathname !== '/' && location.pathname !== '/register' && location.pathname !== '/login')  && <nav className='nav'>
       <div>
-        <a href='/' className='logo'>
+        <a href='' className='logo'>
           <i className='fas fa-book-open' />
         </a>
-        <a href='/' className='logo logoText'>
+        <a href='' className='logo logoText'>
           My<span>Book </span> List
         </a>
       </div>
       <ul>
         <li>
-          <Link to='/'>Home</Link>
+          <Link to='/home'>Home</Link>
         </li>
         <li>
           <Link to='/about'>About</Link>

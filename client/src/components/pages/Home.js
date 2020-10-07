@@ -13,7 +13,7 @@ const Home = () => {
   const { showDialog } = bookContext;
 
   return (
-    <div className='form'>
+    <div className='form' style={{overflowX: 'hidden'}}>
       {showDialog && <DeleteDialog />}
       <h1>Add a Book</h1>
 
