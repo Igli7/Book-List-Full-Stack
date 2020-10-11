@@ -45,6 +45,8 @@ router.post(
       //Save user in DB
       await user.save();
 
+      
+
 
       //Object to send in the token
         const payload = {

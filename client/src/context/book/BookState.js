@@ -13,8 +13,7 @@ import {
   CLEAR_FILTER,
   SET_DIALOG,
   CLEAR_DIALOG,
-  SHOW_NAV
-  
+  SHOW_NAV,
 } from '../types';
 
 const BookState = (props) => {
@@ -50,7 +49,6 @@ const BookState = (props) => {
     filtered: null,
     showNav: true,
   };
-
 
   const [state, dispatch] = useReducer(bookReducer, initialState);
 
@@ -133,7 +131,7 @@ const BookState = (props) => {
     });
   };
 
-  // Show Nav 
+  // Show Nav
 
   return (
     <BookContext.Provider
@@ -152,7 +150,7 @@ const BookState = (props) => {
         updateBook,
         filterBooks,
         clearFilter,
-        navBar
+        navBar,
       }}
     >
       {props.children}

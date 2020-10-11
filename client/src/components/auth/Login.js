@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import library from '../../photo/library.jpg';
 import { Link } from 'react-router-dom';
+import AlertContext from '../../context/alert/alertContext';
+import Alerts from '../layout/Alerts';
 
 const Login = () => {
+  const alertContext = useContext(AlertContext);
+
+  const { setAlert } = alertContext;
+
+
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -17,7 +24,11 @@ const Login = () => {
     });
   };
 
-  const onSubmit = () => {};
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    console.log('Login submit');
+  };
 
   return (
     <div className='cont'>
@@ -25,6 +36,7 @@ const Login = () => {
         <div className='videoContainer'>
           <img width='100vw' height='100vh' src={library} alt=''></img>
         </div>
+        <Alerts />
         <div className='registerForm'>
           <h1>Log In</h1>
           <form id='book-form' onSubmit={onSubmit}>

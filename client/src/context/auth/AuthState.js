@@ -11,111 +11,43 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
 } from '../types';
 
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem('token'),
-    
+    isAuthenticated: null,
+    loading: true,
+    user: null,
+    error: null,
   };
 
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const [state, dispatch] = useReducer(bookReducer, initialState);
+  //Load User
 
-  // Add book
-  const addBook = (book) => {
-    book.id = uuidv4();
-    dispatch({
-      type: ADD_BOOK,
-      payload: book,
-    });
-  };
+  // Register User
 
-  //Set Current Book,
-  const setCurrent = (book) => {
-    dispatch({
-      type: SET_CURRENT,
-      payload: book,
-    });
-  };
+  // Login User
 
-  //clear Current Book,
-  const clearCurrent = () => {
-    dispatch({
-      type: CLEAR_CURRENT,
-    });
-  };
+  // Logout
 
-  // Set Dialog
-  const setDialog = (title) => {
-    dispatch({
-      type: SET_DIALOG,
-      payload: title,
-    });
-  };
-
-  //Clear Dialog
-  const clearDialog = () => {
-    dispatch({
-      type: CLEAR_DIALOG,
-    });
-  };
-
-  // Delete book
-  const deleteBook = (id) => {
-    dispatch({
-      type: DELETE_BOOK,
-      payload: id,
-    });
-  };
-
-  //Update Book,
-  const updateBook = (book) => {
-    dispatch({
-      type: UPDATE_BOOK,
-      payload: book,
-    });
-  };
-
-  //Filter Books,
-
-  const filterBooks = (text) => {
-    dispatch({
-      type: FILTER_BOOKS,
-      payload: text,
-    });
-  };
-
-  //Clear Filter
-
-  const clearFilter = () => {
-    dispatch({
-      type: CLEAR_FILTER,
-    });
-  };
+  // Clear Errors
 
   return (
-    <BookContext.Provider
+    <AuthContext.Provider
       value={{
-        books: state.books,
-        showDialog: state.showDialog,
-        current: state.current,
-        filtered: state.filtered,
-        addBook,
-        deleteBook,
-        setDialog,
-        clearDialog,
-        setCurrent,
-        clearCurrent,
-        updateBook,
-        filterBooks,
-        clearFilter
+        token: state.token,
+        isAuthenticated: state.isAuthenticated,
+        loading: state.loading,
+        user: state.user,
+        error: state.error,
       }}
     >
       {props.children}
-    </BookContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export default BookState;
+export default AuthState;

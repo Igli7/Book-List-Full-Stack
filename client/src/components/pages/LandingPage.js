@@ -17,7 +17,7 @@ const LandingPage = () => {
           ></video>
         </div>
         <div className='content'>
-          <a href='' className='logo logoText landingLogo' style={{}}>
+          <a href='/' className='logo logoText landingLogo' style={{}}>
             My<span>Book </span> List
           </a>
 

@@ -706,6 +706,7 @@ body{
   padding-top: 3em;
   padding-bottom: 3em;
   z-index: 10;
+  word-wrap: break-word;
 }
 
 
@@ -753,6 +754,15 @@ body{
   color: white;
   font-family: cursive;
   padding-left: 0;
+  display: block;
+}
+@media (max-width: 284px) {
+  .landingLogo {
+      margin-top: 2.2em !important;
+  }
+}
+.landingLogo span{
+  
 }
 
 @media (max-width: 650px) {
@@ -885,3 +895,34 @@ input:-webkit-autofill {
   text-decoration: none;
   color: #00c299;
 }
+
+
+/* Alerts */
+
+.alert{
+  position: relative;
+  z-index: 999;
+  width: 500px;
+ 
+  border-radius: 20px;
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 1.1em 0 ;
+}
+
+.alert-danger{
+  border: 2px solid rgba(255, 0, 0,0.7);
+}
+
+.alert .fas {
+  font-size: 2em;
+  margin-left: 0.5em;
+  color: red;
+  padding-right: 0.5em;
+}
+@media (max-width: 540px){
+.alert {
+    width: 90%;
+}}

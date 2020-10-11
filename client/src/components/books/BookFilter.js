@@ -38,7 +38,6 @@ const BookFilter = () => {
     
   };
 
-  console.log(state.text);
   return (
     <div>
       <div className='searchForm'>
