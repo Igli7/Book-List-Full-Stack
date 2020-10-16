@@ -10,13 +10,13 @@ const User = require('../models/User');
 // @route    GET api/auth
 // @desc     get logged in user
 // @access   Private
-router.get('/', auth , async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
   } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error')
+    console.error(err.message);
+    res.status(500).send('Server Error');
   }
 });
 
@@ -35,7 +35,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { email, password, isVerified } = req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -48,6 +48,15 @@ router.post(
 
       if (!isMatch) {
         return res.status(400).json({ msg: 'Invalid Credentials' });
+      }
+
+      if (!isVerified) {
+        return res
+          .status(400)
+          .json({
+            type: 'not-verified',
+            msg: 'Your account has not been verified.',
+          });
       }
 
       const payload = {
@@ -68,8 +77,8 @@ router.post(
         }
       );
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+      console.error(err.message);
+      res.status(500).send('Server Error');
     }
   }
 );

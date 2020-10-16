@@ -13,5 +13,9 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 //Define Routes
 app.use('/api/users', require('./routes/users'));
+app.use('/api/confirmation', require('./routes/confirmation'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/books', require('./routes/books'));
+app.use('/api/resend', require('./routes/resend'));
+
+module.exports = app;

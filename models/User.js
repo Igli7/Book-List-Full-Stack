@@ -17,7 +17,7 @@ const UserSchema = new Schema({
   },
   isVerified: {
     type: Boolean,
-    defaultValue: false,
+    default: false,
   },
   date: {
     type: Date,
