@@ -66,18 +66,18 @@ router.post(
       let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-          user: 'xhukellariigli@gmail.com',
-          pass: 'maba123.',
+          user: config.get('email'),
+          pass: config.get('password'),
         },
       });
 
       let url = `http://localhost:3500/api/confirmation/${vToken.token}`;
 
       let mailOptions = {
-        from: 'xhukellariigli@gmail.com',
+        from: config.get('email'),
         to: user.email,
         subject: 'Account Verification Token',
-        html: `Please Veridy your account by clicking the link: <a href='${url}' target="_blank"> ${url} </a>`,
+        html: `Please Veriy your account by clicking the link: <a href='${url}' target="_blank"> ${url} </a>`,
       };
       transporter.sendMail(mailOptions, (err) => {
         if (err) {

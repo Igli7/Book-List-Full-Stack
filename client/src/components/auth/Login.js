@@ -9,7 +9,6 @@ const Login = () => {
 
   const { setAlert } = alertContext;
 
-
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -36,8 +35,14 @@ const Login = () => {
         <div className='videoContainer'>
           <img width='100vw' height='100vh' src={library} alt=''></img>
         </div>
+        <h3
+          className='logo logoText landingLogo'
+          style={{ paddingBottom: '0.5em', paddingTop: '1em' }}
+        >
+          My<span>Book </span> List
+        </h3>
         <Alerts />
-        <div className='registerForm'>
+        <div className='registerForm' style={{ marginBottom: '2em' }}>
           <h1>Log In</h1>
           <form id='book-form' onSubmit={onSubmit}>
             <div className='text'>

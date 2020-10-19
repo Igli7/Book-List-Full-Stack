@@ -11,12 +11,11 @@ router.get(`/:token`, [], async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { token } = req.params.token;
-
+  console.log(req.params.token);
   let vToken = null;
   try {
     // Find a matching token
-    await VerificationToken.findOne(token, (err, token) => {
+    await VerificationToken.findOne({ token: req.params.token }, (err, token) => {
       vToken = token;
 
       if (!token)

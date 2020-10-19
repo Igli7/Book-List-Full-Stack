@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const app = express();
+const path = require('path');
 
 // Connect DB
 connectDB();
@@ -17,5 +18,9 @@ app.use('/api/confirmation', require('./routes/confirmation'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/books', require('./routes/books'));
 app.use('/api/resend', require('./routes/resend'));
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 module.exports = app;

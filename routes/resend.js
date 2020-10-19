@@ -66,7 +66,7 @@ router.post('/', [], async (req, res) => {
       from: 'xhukellariigli@gmail.com',
       to: user.email,
       subject: 'Account Verification Token',
-      html: `Please Veridy your account by clicking the link: <a href='${url}' target="_blank"> ${url} </a>`,
+      html: `Please Veriy your account by clicking the link: <a href='${url}' target="_blank"> ${url} </a>`,
     };
     transporter.sendMail(mailOptions, (err) => {
       if (err) {

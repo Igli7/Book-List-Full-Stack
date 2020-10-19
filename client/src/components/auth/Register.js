@@ -42,6 +42,9 @@ const Register = () => {
       <div className='videoContainer'>
         <img width='100vw' height='100vh' src={library} alt=''></img>
       </div>
+      <a className='logo logoText landingLogo' style={{paddingBottom: '1em'}}>
+            My<span>Book </span> List
+          </a>
       <Alerts />
       <div className='registerForm'>
         <h1>Sign Up</h1>
