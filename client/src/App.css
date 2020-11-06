@@ -735,7 +735,7 @@ body{
   height: auto;
   z-index: -100;
   transform: translate(-50%, -50%);
-  background: url("./photo/photo.PNG") no-repeat center center/cover;
+  background: url("./photo/photo.jpg") no-repeat center center/cover;
 }
 .landingContainer .videoContainer::after {
   content: "";
