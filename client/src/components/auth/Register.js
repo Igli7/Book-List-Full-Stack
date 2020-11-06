@@ -18,11 +18,11 @@ const Register = (props) => {
       clearErrors();
     } else {
       if (isVerified === false) {
-        props.history.push('/resend'); 
-      } 
+        props.history.push('/resend');
+      }
     }
     // eslint-disable-next-line
-  }, [error,isVerified, props.history]);
+  }, [error, isVerified, props.history]);
 
   const [user, setUser] = useState({
     name: '',
@@ -40,6 +40,31 @@ const Register = (props) => {
     });
   };
 
+  // Check for UpperCase
+  let checkForUpperCase = null;
+  if (password.match(/[A-Z]/)) {
+    checkForUpperCase = true;
+  }
+
+  // Check for numbers
+  let checkForNumbers = null;
+  if (password.match(/\d+/g)) {
+    checkForNumbers = true;
+  }
+
+  // Check for Symbols
+  const symbols = new RegExp(/[^A-Z a-z 0-9]/);
+  let checkForSymbols = null;
+  if (symbols.test(password)) {
+    checkForSymbols = true;
+  }
+
+  // Check for 8-char
+  let checkFor8Char = null;
+  if (password.length >= 8) {
+    checkFor8Char = true;
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -47,6 +72,16 @@ const Register = (props) => {
       setAlert('Please Enter all fields', 'danger');
     } else if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
+    } else if (
+      checkForUpperCase !== true ||
+      checkForNumbers !== true ||
+      checkForSymbols !== true ||
+      checkFor8Char !== true
+    ) {
+      setAlert(
+        `Passwords must contain: \n An Uppercase character \n A number \n A Symbol \n At least 8 characters`,
+        'danger'
+      );
     } else {
       register({
         name,
@@ -103,6 +138,12 @@ const Register = (props) => {
             <label htmlFor='password' className='labelName'>
               <span className='contentName'>Password</span>
             </label>
+          </div>
+          <div className='text passwordCheck'>
+            <p className={checkForUpperCase && 'green'}>A-Z</p>
+            <p className={checkForNumbers && 'green'}>1-9</p>
+            <p className={checkForSymbols && 'green'}>#,!./</p>
+            <p className={checkFor8Char && 'green'}>8-char</p>
           </div>
           <div className='text'>
             <input

@@ -23,10 +23,45 @@ const Reset = (props) => {
     });
   };
 
+  // Check for UpperCase
+  let checkForUpperCase = null;
+  if (password.match(/[A-Z]/)) {
+    checkForUpperCase = true;
+  }
+
+  // Check for numbers
+  let checkForNumbers = null;
+  if (password.match(/\d+/g)) {
+    checkForNumbers = true;
+  }
+
+  // Check for Symbols
+  const symbols = new RegExp(/[^A-Z a-z 0-9]/);
+  let checkForSymbols = null;
+  if (symbols.test(password)) {
+    checkForSymbols = true;
+  }
+
+  // Check for 8-char
+  let checkFor8Char = null;
+  if (password.length >= 8) {
+    checkFor8Char = true;
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
+    } else if (
+      checkForUpperCase !== true ||
+      checkForNumbers !== true ||
+      checkForSymbols !== true ||
+      checkFor8Char !== true
+    ) {
+      setAlert(
+        `Passwords must contain: \n An Uppercase character \n A number \n A Symbol \n At least 8 characters`,
+        'danger'
+      );
     } else {
       reset({
         password,
@@ -65,6 +100,29 @@ const Reset = (props) => {
             <label htmlFor='password' className='labelName'>
               <span className='contentName'>New Password</span>
             </label>
+          </div>
+          <div className='text passwordCheck' style={{ textAlign: 'center' }}>
+            <p
+              className={checkForUpperCase && 'green'}
+              style={{ color: 'black ' }}
+            >
+              A-Z
+            </p>
+            <p
+              className={checkForNumbers && 'green'}
+              style={{ color: 'black ' }}
+            >
+              1-9
+            </p>
+            <p
+              className={checkForSymbols && 'green'}
+              style={{ color: 'black ' }}
+            >
+              #,!./
+            </p>
+            <p className={checkFor8Char && 'green'} style={{ color: 'black ' }}>
+              8-char
+            </p>
           </div>
           <div className='text'>
             <input

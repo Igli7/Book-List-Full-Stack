@@ -1,14 +1,17 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import BookContext from '../../context/book/bookContext';
 import { useContext } from 'react';
+import AlertContext from '../../context/alert/alertContext';
 import TextareaAutosize from 'react-textarea-autosize';
 
 const BookItem = ({ book }) => {
   const { _id, title, author, isbn, date, description } = book;
 
   const bookContext = useContext(BookContext);
+  const alertContext = useContext(AlertContext);
 
   const { setDialog, setCurrent, current, clearCurrent } = bookContext;
+  const { setAlert } = alertContext;
 
   useEffect(() => {
     if (current !== null) {
@@ -46,11 +49,54 @@ const BookItem = ({ book }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    bookContext.updateBook(updateBook);
-
-    clearCurrent();
+    console.log(updateBook.isbn.length);
+    if (updateBook.isbn.length !== 13) {
+      setAlert('ISBN number must be 13 characters!', 'danger');
+    } else {
+      bookContext.updateBook(updateBook);
+      clearCurrent();
+    }
   };
+
+  // Input Restriction
+
+  // ISBN
+  function setInputFilter(textbox, inputFilter) {
+    [
+      'input',
+      'keydown',
+      'keyup',
+      'mousedown',
+      'mouseup',
+      'select',
+      'contextmenu',
+      'drop',
+    ].forEach(function (event) {
+      if (textbox) {
+        textbox.addEventListener(event, function () {
+          if (inputFilter(this.value)) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+          } else if (this.hasOwnProperty('oldValue')) {
+            this.value = this.oldValue;
+            this.setSelectionRange(
+              this.oldSelectionStart,
+              this.oldSelectionEnd
+            );
+          } else {
+            this.value = '';
+          }
+        });
+      }
+    });
+  }
+
+  //Install input filter
+  //ISBN
+  setInputFilter(document.getElementById('isbn1'), function (value) {
+    return /^\d*$/.test(value);
+  });
 
   return (
     <Fragment>
@@ -92,6 +138,7 @@ const BookItem = ({ book }) => {
                     placeholder={isbn}
                     value={updateBook.isbn}
                     name='isbn'
+                    id='isbn1'
                     onChange={onChange}
                   />
                 </span>
@@ -104,7 +151,9 @@ const BookItem = ({ book }) => {
                   placeholder={date}
                   value={updateBook.date}
                   name='date'
+                  id='date1'
                   onChange={onChange}
+                  style={{ height: '48px !important', overflowY: 'hidden' }}
                 />
               </p>
             </div>

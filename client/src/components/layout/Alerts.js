@@ -5,8 +5,6 @@ import { useLocation } from 'react-router-dom';
 
 const Alerts = () => {
   let location = useLocation();
-
-  console.log(location.pathname);
   const alertContext = useContext(AlertContext);
 
   const { alerts, closeAlert } = alertContext;
@@ -25,7 +23,10 @@ const Alerts = () => {
               <CSSTransition key={alert.id} timeout={500} classNames='item'>
                 <div
                   className={`alert alert-${
-                    location.pathname === '/login' || location.pathname ==='/register' ? 'dark' : ''
+                    location.pathname === '/login' ||
+                    location.pathname === '/register'
+                      ? 'dark'
+                      : ''
                   }`}
                   ref={wrapper}
                 >
@@ -41,14 +42,23 @@ const Alerts = () => {
                       </h5>
                     )}
 
-                    <div className='alertText'>
-                      <b>-</b> {alert.msg}
+                    <div
+                      className='alertText'
+                      style={{ whiteSpace: 'pre-wrap' }}
+                    >
+                      <b>- </b> {alert.msg}
                     </div>
                   </div>
                   <div className='alertBtnContainer'>
-                    <button onClick={onClick} className={`close close-${
-                    location.pathname === '/login' || location.pathname ==='/register' ? 'dark' : ''
-                  }`}></button>
+                    <button
+                      onClick={onClick}
+                      className={`close close-${
+                        location.pathname === '/login' ||
+                        location.pathname === '/register'
+                          ? 'dark'
+                          : ''
+                      }`}
+                    ></button>
                   </div>
                   <div className='timeline'></div>
                 </div>
