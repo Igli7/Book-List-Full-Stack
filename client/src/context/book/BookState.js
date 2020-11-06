@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import BookContext from './bookContext';
 import bookReducer from './bookReducer';
-import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 import {
   ADD_BOOK,
@@ -14,50 +14,73 @@ import {
   SET_DIALOG,
   CLEAR_DIALOG,
   SHOW_NAV,
+  BOOK_ERROR,
+  GET_BOOKS,
+  CLEAR_BOOKS,
+  CLEAR_ERRORS,
 } from '../types';
 
 const BookState = (props) => {
   const initialState = {
-    books: [
-      {
-        id: '1',
-        title: 'Book 1',
-        author: 'Author 1',
-        isbn: '1234567890123',
-        date: '10/12/2018',
-        description: 'Best ever',
-      },
-      {
-        id: '2',
-        title: 'Book 2',
-        author: 'Author 2',
-        isbn: '1234567890124',
-        date: '12/07/2019',
-        description: 'Best ever 2',
-      },
-      {
-        id: '3',
-        title: 'Book 3',
-        author: 'Author 3',
-        isbn: '1234567890125',
-        date: '06/07/2020',
-        description: 'Best ever 3',
-      },
-    ],
+    books: [],
     current: null,
     showDialog: null,
     filtered: null,
     showNav: true,
+    error: null,
+    success: null,
   };
 
   const [state, dispatch] = useReducer(bookReducer, initialState);
 
+  // Get books
+  const getBooks = async () => {
+    try {
+      const res = await axios.get('http://localhost:3500/api/books');
+
+      dispatch({
+        type: GET_BOOKS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: BOOK_ERROR,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
   // Add book
-  const addBook = (book) => {
-    book.id = uuidv4();
+  const addBook = async (book) => {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        'http://localhost:3500/api/books',
+        book,
+        config
+      );
+      console.log(res.data);
+      dispatch({
+        type: ADD_BOOK,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: BOOK_ERROR,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  // Clear Errors
+  const clearErrors = () => {
     dispatch({
-      type: ADD_BOOK,
-      payload: book,
+      type: CLEAR_ERRORS,
     });
   };
 
@@ -92,19 +115,57 @@ const BookState = (props) => {
   };
 
   // Delete book
-  const deleteBook = (id) => {
+  const deleteBook = async (id) => {
+    try {
+      const res = await axios.delete(`http://localhost:3500/api/books/${id}`);
+
+      dispatch({
+        type: DELETE_BOOK,
+        payload: id,
+        payload1: res.data,
+      });
+    } catch (err) {
+      console.log(err.response.msg);
+      dispatch({
+        type: BOOK_ERROR,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  // Clear Books
+  const clearBooks = () => {
     dispatch({
-      type: DELETE_BOOK,
-      payload: id,
+      type: CLEAR_BOOKS,
     });
   };
 
   //Update Book,
-  const updateBook = (book) => {
-    dispatch({
-      type: UPDATE_BOOK,
-      payload: book,
-    });
+  const updateBook = async (book) => {
+    console.log(book);
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.put(
+        `http://localhost:3500/api/books/${book._id}`,
+        book,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_BOOK,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: BOOK_ERROR,
+        payload: err.response.data.msg,
+      });
+    }
   };
 
   //Filter Books,
@@ -141,6 +202,8 @@ const BookState = (props) => {
         current: state.current,
         filtered: state.filtered,
         showNav: state.showNav,
+        error: state.error,
+        success: state.success,
         addBook,
         deleteBook,
         setDialog,
@@ -151,6 +214,9 @@ const BookState = (props) => {
         filterBooks,
         clearFilter,
         navBar,
+        getBooks,
+        clearBooks,
+        clearErrors,
       }}
     >
       {props.children}

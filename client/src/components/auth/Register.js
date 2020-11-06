@@ -1,13 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import library from '../../photo/library.jpg';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
+import AuthContext from '../../context/auth/authContext';
 import Alerts from '../layout/Alerts';
 
-const Register = () => {
+const Register = (props) => {
   const alertContext = useContext(AlertContext);
+  const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
+  const { register, error, clearErrors, isVerified } = authContext;
+
+  useEffect(() => {
+    if (error === 'User already exists') {
+      setAlert(error, 'danger');
+      clearErrors();
+    } else {
+      if (isVerified === false) {
+        props.history.push('/resend'); 
+      } 
+    }
+    // eslint-disable-next-line
+  }, [error,isVerified, props.history]);
 
   const [user, setUser] = useState({
     name: '',
@@ -28,12 +43,16 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if(name === '' || email === '' || password === ''){
+    if (name === '' || email === '' || password === '') {
       setAlert('Please Enter all fields', 'danger');
     } else if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
-    }else{
-      console.log('HAHA')
+    } else {
+      register({
+        name,
+        email,
+        password,
+      });
     }
   };
 
@@ -42,9 +61,9 @@ const Register = () => {
       <div className='videoContainer'>
         <img width='100vw' height='100vh' src={library} alt=''></img>
       </div>
-      <a className='logo logoText landingLogo' style={{paddingBottom: '1em'}}>
-            My<span>Book </span> List
-          </a>
+      <a className='logo logoText landingLogo' style={{ paddingBottom: '1em' }}>
+        My<span>Book </span> List
+      </a>
       <Alerts />
       <div className='registerForm'>
         <h1>Sign Up</h1>
@@ -53,7 +72,6 @@ const Register = () => {
             <input
               type='text'
               name='name'
-              id='title'
               required
               value={name}
               onChange={onChange}
@@ -66,7 +84,6 @@ const Register = () => {
             <input
               type='email'
               name='email'
-              id='author'
               required
               value={email}
               onChange={onChange}
@@ -79,7 +96,6 @@ const Register = () => {
             <input
               type='password'
               name='password'
-              id='isbn'
               required
               value={password}
               onChange={onChange}
@@ -92,7 +108,6 @@ const Register = () => {
             <input
               type='password'
               name='password2'
-              id='date'
               required
               value={password2}
               onChange={onChange}

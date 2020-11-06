@@ -6,6 +6,10 @@ const path = require('path');
 // Connect DB
 connectDB();
 
+var cors = require('cors');
+
+app.use(cors());
+
 // Init Middleware
 app.use(express.json({ extended: false }));
 

@@ -36,7 +36,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password, isVerified } = req.body;
+    const { email, password } = req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -47,14 +47,14 @@ router.post(
 
       const isMatch = await bcrypt.compare(password, user.password);
 
-      if (!isMatch) {
+      console.log(isMatch);
+      if (isMatch === false) {
         return res.status(400).json({ msg: 'Invalid Credentials' });
       }
 
-      if (isVerified) {
+      if (!user.isVerified) {
         return res.status(400).json({
-          type: 'not-verified',
-          msg: 'Your account has not been verified.',
+          msg: 'Your account has not been verified. Please check your email.',
         });
       }
 
@@ -72,7 +72,7 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          res.json({ token, user });
         }
       );
     } catch (err) {
@@ -96,8 +96,9 @@ router.post(
       let user = await User.findOne({ email });
 
       if (!user) {
-        return res.status(401).json({
-          msg: `The email address ${req.body.email} is not associated with any account. Double-check your email adress and try again`,
+        return res.status(400).json({
+          id: 1,
+          msg: `Your email was not found. Please double-check your email and try again.`,
         });
       }
 
@@ -128,8 +129,10 @@ router.post(
         }
         res
           .status(200)
-          .send(`A verification email has been sent to ${user.email}`);
+          .send(`A Reset Password link has been sent to ${user.email}`);
       });
+      res.json({token: user.resetPasswordToken,
+      msg:'A Reset Password link has been sent to your email address.'});
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
@@ -139,10 +142,14 @@ router.post(
 
 router.get('/reset/:token', async (req, res) => {
   try {
+    res.redirect('http://localhost:3000/reset');
+
     let user = await User.findOne({
       resetPasswordToken: req.params.token,
       resetPasswordExpires: { $gt: Date.now() },
     });
+
+    console.log(user);
 
     if (!user) {
       return res.status(401).json({

@@ -1,29 +1,39 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import BookContext from '../../context/book/bookContext';
 import BookItem from './BookItem';
 
 const Books = () => {
   const bookContext = useContext(BookContext);
 
-  const { books, filtered } = bookContext;
+  const { books, filtered, getBooks, loading } = bookContext;
 
-  if(books.length === 0){
-    return <h4 style={{
-      textAlign:'center',
-      paddingBottom: '3.5em',
-      paddingTop:'2em'
-    }}>Please Add a Book</h4>
+  useEffect(()=>{
+    getBooks();
+
+    // eslint-disable-next-line
+  },[])
+
+  if (books.length === 0) {
+    return (
+      <h4
+        style={{
+          textAlign: 'center',
+          paddingBottom: '3.5em',
+          paddingTop: '2em',
+        }}
+      >
+        Please Add a Book
+      </h4>
+    );
+  } else {
+    return (
+      <div className='bookList'>
+        {filtered !== null
+          ? filtered.map((book) => <BookItem book={book} key={book._id} />)
+          : books.map((book) => <BookItem book={book} key={book._id} />)}
+      </div>
+    );
   }
-
-  return (
-    <div className='bookList'>
-      {filtered !== null ? filtered.map((book) => (<BookItem book={book} key={book.id} />)) : books.map((book) => (
-        <BookItem book={book} key={book.id} />
-      ))}
-
-  
-    </div>
-  );
 };
 
 export default Books;

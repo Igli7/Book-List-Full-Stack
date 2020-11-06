@@ -41,7 +41,7 @@ UserSchema.pre('save', function (next) {
 
   if (!user.isModified('password')) return next();
 
-  bcrypt.genSalt(10, (err, salt) => {
+  bcrypt.genSalt(12, (err, salt) => {
     if (err) return next(err);
 
     bcrypt.hash(user.password, salt, (err, hash) => {
@@ -53,8 +53,11 @@ UserSchema.pre('save', function (next) {
   });
 });
 
-UserSchema.methods.comparePassword = function (password) {
-  return bcrypt.compareSync(password, this.password);
+UserSchema.methods.comparePassword = function(password, cb) {
+  bcrypt.compare(password, this.password, function(err, isMatch) {
+      if (err) return cb(err);
+      cb(null, isMatch);
+  });
 };
 
 UserSchema.methods.generateJWT = function () {

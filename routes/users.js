@@ -41,10 +41,6 @@ router.post(
         password,
       });
 
-      // Hash password with bcrypt
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
-
       //Save user in DB
       await user.save();
 
@@ -88,11 +84,9 @@ router.post(
           .send(`A verification email has been sent to ${user.email}`);
       });
 
-      res.json('Email was sent');
-
       //Object to send in the token
       const payload = {
-        name: {
+        user: {
           id: user.id,
         },
       };
@@ -106,7 +100,7 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          res.json({ token, user });
         }
       );
     } catch (err) {

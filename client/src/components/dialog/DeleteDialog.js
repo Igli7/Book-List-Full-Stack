@@ -20,12 +20,17 @@ const DeleteDialog = () => {
   };
 
   const onDelete = () => {
-    deleteBook(showDialog.id);
+    deleteBook(showDialog._id);
     clearDialog();
   };
 
   const noMatch =
-    titleInput !== showDialog.title.split(' ').join('').toLowerCase();
+    titleInput !==
+    showDialog.title
+      .replace(/(\r\n|\n|\r)/gm, '')
+      .split(' ')
+      .join('')
+      .toLowerCase();
 
   return (
     <Fragment>

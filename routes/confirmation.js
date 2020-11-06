@@ -31,12 +31,14 @@ router.get(`/:token`, [], async (req, res) => {
             .status(400)
             .send({ msg: 'We were unable to find a user for this token' });
         }
+        
         if (user.isVerified) {
           return res.status(400).send({
             type: 'already-verified',
             msg: 'This user has already been verified.',
           });
         }
+        
 
         // Verify and save user
         user.isVerified = true;

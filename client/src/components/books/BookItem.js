@@ -1,19 +1,25 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import BookContext from '../../context/book/bookContext';
 import { useContext } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
 const BookItem = ({ book }) => {
-  const { id, title, author, isbn, date, description } = book;
+  const { _id, title, author, isbn, date, description } = book;
 
   const bookContext = useContext(BookContext);
 
   const { setDialog, setCurrent, current, clearCurrent } = bookContext;
 
+  useEffect(() => {
+    if (current !== null) {
+      setBook(current);
+    }
+  }, [bookContext, current]);
+
   const onDelete = () => {
     setDialog({
       title,
-      id,
+      _id,
     });
     clearCurrent();
   };
@@ -23,7 +29,7 @@ const BookItem = ({ book }) => {
   };
 
   const [updateBook, setBook] = useState({
-    id: id,
+    _id: _id,
     title: title,
     author: author,
     isbn: isbn,
@@ -48,7 +54,7 @@ const BookItem = ({ book }) => {
 
   return (
     <Fragment>
-      {current && current.id === id ? (
+      {current && current._id === _id ? (
         <div className='book'>
           <div className='bookList'></div>
           <form

@@ -54,13 +54,8 @@ router.post(
         user: req.user.id,
       });
 
-      let book = await Book.findOne({ isbn });
-      if (book) {
-        return res.status(400).json({ msg: 'Book already exists' });
-      }
-
-      book = await newBook.save();
-      res.json(book);
+      const book = await newBook.save();
+      res.json({ book: book, msg: 'Book Addded!' });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
@@ -95,16 +90,18 @@ router.put('/:id', auth, async (req, res) => {
       return res.status(401).json({ msg: 'Not Authorized' });
     }
 
-    //Prevents error
-    mongoose.set('useFindAndModify', false);
+    if (title !== book.title) {
+      //Prevents error
+      mongoose.set('useFindAndModify', false);
 
-    book = await Book.findByIdAndUpdate(
-      req.params.id,
-      { $set: bookFields },
-      { new: true }
-    );
+      book = await Book.findByIdAndUpdate(
+        req.params.id,
+        { $set: bookFields },
+        { new: true }
+      );
 
-    res.json(book);
+      res.json({ book: book, msg: 'The book was successfully updated!' });
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -132,7 +129,7 @@ router.delete('/:id', auth, async (req, res) => {
     mongoose.set('useFindAndModify', false);
 
     await Book.findByIdAndRemove(req.params.id);
-    res.json({ msg: 'Contact Removed' });
+    res.json({ msg: 'The book was successfully deleted!' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

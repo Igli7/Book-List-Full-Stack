@@ -14,9 +14,8 @@ const VerificationTokenSchema = new Schema({
 
   createdAt: {
     type: Date,
-    required: true,
+    expires: '2m',
     default: Date.now,
-    expires: 43200,
   },
 });
 
