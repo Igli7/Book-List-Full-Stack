@@ -11,7 +11,6 @@ app.use(cors());
 
 // Init Middleware
 app.use(express.json({ extended: false }));
-
 app.get('/', (req, res) => {
   res.send('Hello from Express!');
 });
