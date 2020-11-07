@@ -25,7 +25,6 @@ const Login = (props) => {
   } = authContext;
 
   useEffect(() => {
-    console.log(success);
     if (error === 'Invalid Credentials') {
       setAlert(error, 'danger');
       clearErrors();
@@ -42,11 +41,9 @@ const Login = (props) => {
       setAlert(error, 'danger');
       clearErrors();
     } else if (success !== null) {
-      console.log(success === 'A Reset Password link has been sent to your email address.');
       if (
         success === 'A Reset Password link has been sent to your email address.'
       ) {
-        console.log(success);
         setAlert(success, 'success');
         clearErrors();
       }
@@ -128,6 +125,7 @@ const Login = (props) => {
                 required
                 value={password}
                 onChange={onChange}
+                autoComplete='true'
               />
               <label htmlFor='password' className='labelName'>
                 <span className='contentName'>Password</span>

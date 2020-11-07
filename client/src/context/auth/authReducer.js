@@ -81,6 +81,12 @@ export default (state, action) => {
         error: action.payload,
       };
 
+    case AUTH_ERROR:
+      return {
+        ...state,
+        user: null,
+      };
+
     case CLEAR_ERRORS:
       return {
         ...state,

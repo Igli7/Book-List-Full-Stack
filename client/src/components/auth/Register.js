@@ -96,11 +96,14 @@ const Register = (props) => {
       <div className='videoContainer'>
         <img width='100vw' height='100vh' src={library} alt=''></img>
       </div>
-      <a className='logo logoText landingLogo' style={{ paddingBottom: '1em' }}>
-        My<span>Book </span> List
-      </a>
       <Alerts />
-      <div className='registerForm'>
+      <h3
+          className='logo logoText landingLogo'
+          style={{ paddingBottom: '0.5em', paddingTop: '1em' }}
+        >
+          My<span>Book </span> List
+        </h3>
+      <div className='registerForm' >
         <h1>Sign Up</h1>
         <form id='book-form' onSubmit={onSubmit}>
           <div className='text'>
@@ -134,6 +137,7 @@ const Register = (props) => {
               required
               value={password}
               onChange={onChange}
+              autoComplete='true'
             />
             <label htmlFor='password' className='labelName'>
               <span className='contentName'>Password</span>
@@ -152,6 +156,7 @@ const Register = (props) => {
               required
               value={password2}
               onChange={onChange}
+              autoComplete='true'
             />
             <label htmlFor='password2' className='labelName'>
               <span className='contentName'>Confirm Password</span>

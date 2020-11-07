@@ -1,10 +1,4 @@
-import React, {
-  Fragment,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
 import Alerts from '../layout/Alerts';
@@ -20,7 +14,9 @@ const Resend = (props) => {
   const [hours, setHours] = useState('');
   const [minutes, setMinutes] = useState('');
   const [seconds, setSeconds] = useState('');
+  // eslint-disable-next-line
   const daysRadius = mapNumber(days, 30, 0, 0, 360);
+  // eslint-disable-next-line
   const hoursRadius = mapNumber(hours, 24, 0, 0, 360);
   const minutesRadius = mapNumber(minutes, 60, 0, 0, 360);
   const secondsRadius = mapNumber(seconds, 60, 0, 0, 360);
@@ -44,14 +40,13 @@ const Resend = (props) => {
     if (error === 'This account has already been verified') {
       setAlert(error, 'danger');
       clearErrors();
-    } else if(user !== null){
-      if (
-        success === `A verification email has been sent to ${user.email}`
-      ) {
+    } else if (user !== null) {
+      if (success === `A verification email has been sent to ${user.email}`) {
         setAlert(success, 'success');
         clearErrors();
       }
     }
+    // eslint-disable-next-line
   }, [error, success]);
 
   const setTime = () => {
@@ -61,7 +56,6 @@ const Resend = (props) => {
     const curDate = new Date();
     let date = AddMinutesToDate(curDate, 5);
     let day = date.getDate();
-    console.log(day);
     if (day < 10) {
       day = `0${day}`;
     }
@@ -135,9 +129,9 @@ const Resend = (props) => {
 
   let email = 'email@email';
 
-if(user !== null){
-  email = user.email
-}
+  if (user !== null) {
+    email = user.email;
+  }
 
   return (
     <div className='resendContainer'>

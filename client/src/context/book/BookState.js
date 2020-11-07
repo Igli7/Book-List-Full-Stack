@@ -64,7 +64,6 @@ const BookState = (props) => {
         book,
         config
       );
-      console.log(res.data);
       dispatch({
         type: ADD_BOOK,
         payload: res.data,
@@ -125,7 +124,6 @@ const BookState = (props) => {
         payload1: res.data,
       });
     } catch (err) {
-      console.log(err.response.msg);
       dispatch({
         type: BOOK_ERROR,
         payload: err.response.data.msg,
@@ -142,7 +140,6 @@ const BookState = (props) => {
 
   //Update Book,
   const updateBook = async (book) => {
-    console.log(book);
     const config = {
       headers: {
         'Content-type': 'application/json',

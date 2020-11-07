@@ -15,23 +15,22 @@ const Home = () => {
   const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
 
-  const { loadUser, isAuthenticated } = authContext;
+  const { loadUser } = authContext;
   const { setAlert } = alertContext;
   const { showDialog, success, clearErrors, error } = bookContext;
 
   useEffect(() => {
-    if(success !== null){
+    if (success !== null) {
       setAlert(success, 'success');
       clearErrors();
     }
-    if(error !==null) {
+    if (error !== null) {
       setAlert(error, 'danger');
       clearErrors();
     }
     loadUser();
     // eslint-disable-next-line
   }, [success, error]);
-  console.log(isAuthenticated);
 
   return (
     <div className='form' style={{ overflowX: 'hidden' }}>

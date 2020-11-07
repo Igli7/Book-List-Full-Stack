@@ -47,7 +47,6 @@ router.post(
 
       const isMatch = await bcrypt.compare(password, user.password);
 
-      console.log(isMatch);
       if (isMatch === false) {
         return res.status(400).json({ msg: 'Invalid Credentials' });
       }
@@ -131,8 +130,10 @@ router.post(
           .status(200)
           .send(`A Reset Password link has been sent to ${user.email}`);
       });
-      res.json({token: user.resetPasswordToken,
-      msg:'A Reset Password link has been sent to your email address.'});
+      res.json({
+        token: user.resetPasswordToken,
+        msg: 'A Reset Password link has been sent to your email address.',
+      });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
@@ -148,8 +149,6 @@ router.get('/reset/:token', async (req, res) => {
       resetPasswordToken: req.params.token,
       resetPasswordExpires: { $gt: Date.now() },
     });
-
-    console.log(user);
 
     if (!user) {
       return res.status(401).json({
@@ -181,7 +180,6 @@ router.post(
           msg: `Password reset token is invalid or has expired`,
         });
       }
-      console.log(req.body.password);
 
       //Set the new password
       user.password = req.body.password;

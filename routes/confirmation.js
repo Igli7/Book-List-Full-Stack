@@ -11,7 +11,6 @@ router.get(`/:token`, [], async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  console.log(req.params.token);
   let vToken = null;
   try {
     // Find a matching token

@@ -63,12 +63,12 @@ const Reset = (props) => {
         'danger'
       );
     } else {
+      clearReset();
+      logout();
       reset({
         password,
       });
-      props.history.push('/login');
-      clearReset();
-      logout();
+     props.history.push('/');
     }
   };
 

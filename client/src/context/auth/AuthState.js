@@ -42,7 +42,6 @@ const AuthState = (props) => {
 
   //Load User
   const loadUser = async () => {
-    console.log('User loaded');
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -55,11 +54,17 @@ const AuthState = (props) => {
         payload: res.data,
       });
     } catch (err) {
-      console.log(err);
       dispatch({
-        type: AUTH_ERROR,
+        type: LOGIN_FAIL,
       });
     }
+  };
+
+  // setUserToNull
+  const setUserToNull = () => {
+    dispatch({
+      type: AUTH_ERROR,
+    });
   };
 
   // Resend Email
@@ -78,7 +83,7 @@ const AuthState = (props) => {
       );
       dispatch({
         type: RESEND_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
       loadUser();
     } catch (err) {
@@ -147,7 +152,6 @@ const AuthState = (props) => {
 
       loadUser();
     } catch (err) {
-      console.log(err.response.data.msg);
       dispatch({
         type: LOGIN_FAIL,
         payload: err.response.data.msg,
@@ -170,13 +174,11 @@ const AuthState = (props) => {
         config
       );
 
-      console.log(res.data);
       dispatch({
         type: RESET,
         payload: res.data,
       });
     } catch (err) {
-      console.log(err.response.data);
       dispatch({
         type: LOGIN_FAIL,
         payload: err.response.data.msg,
@@ -192,17 +194,18 @@ const AuthState = (props) => {
         'Content-type': 'application/json',
       },
     };
-    console.log(password);
 
     try {
-      const res = await axios.post(
+      await axios.post(
         `http://localhost:3500/api/auth/reset/${initialState.resetToken}`,
         password,
         config
       );
-      console.log(res.data.msg);
     } catch (err) {
-      console.log(err.response.data);
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: err.response.data.msg,
+      });
     }
   };
 
@@ -278,6 +281,7 @@ const AuthState = (props) => {
         reset,
         clearReset,
         setTimeout,
+        setUserToNull,
       }}
     >
       {props.children}

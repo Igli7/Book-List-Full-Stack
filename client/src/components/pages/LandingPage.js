@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import video from '../../photo/video.mp4';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/auth/authContext';
 
-const LandingPage = () => {
+const LandingPage = (props) => {
+  const authContext = useContext(AuthContext);
+
+  const { loadUser, user, setUserToNull } = authContext;
+
+  useEffect(() => {
+    setUserToNull();
+    loadUser();
+
+    if (user) {
+      props.history.push('/home');
+    }
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className='cont'>
       <div className='landingContainer'>
@@ -17,7 +32,7 @@ const LandingPage = () => {
           ></video>
         </div>
         <div className='content'>
-          <a href='/' className='logo logoText landingLogo' >
+          <a href='/' className='logo logoText landingLogo'>
             My<span>Book </span> List
           </a>
 

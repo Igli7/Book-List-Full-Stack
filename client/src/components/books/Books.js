@@ -5,7 +5,7 @@ import BookItem from './BookItem';
 const Books = () => {
   const bookContext = useContext(BookContext);
 
-  const { books, filtered, getBooks, loading } = bookContext;
+  const { books, filtered, getBooks } = bookContext;
 
   useEffect(()=>{
     getBooks();

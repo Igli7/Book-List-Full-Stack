@@ -49,7 +49,6 @@ const BookItem = ({ book }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(updateBook.isbn.length);
     if (updateBook.isbn.length !== 13) {
       setAlert('ISBN number must be 13 characters!', 'danger');
     } else {

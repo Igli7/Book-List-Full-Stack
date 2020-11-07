@@ -12,14 +12,14 @@ const ResetDialog = () => {
 
   useEffect(() => {
     if (error) {
+      // eslint-disable-next-line
       if (error.id == 1) {
-        console.log(error.id)
         setAlert(error.msg, 'danger');
         clearErrors();
       }
     }
 
-    
+    // eslint-disable-next-line
   }, [error]);
 
   const [state, setState] = useState({
@@ -35,7 +35,6 @@ const ResetDialog = () => {
     });
   };
 
-  console.log(email);
   const clearDialog = () => {
     clearResetDialog();
   };
@@ -100,7 +99,6 @@ const ResetDialog = () => {
             </button>
           </div>
         </form>
-        
       </div>
       <Alerts />
     </Fragment>
