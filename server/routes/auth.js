@@ -143,8 +143,6 @@ router.post(
 
 router.get('/reset/:token', async (req, res) => {
   try {
-    res.redirect('https://wizardly-kirch-736088.netlify.app/reset');
-
     let user = await User.findOne({
       resetPasswordToken: req.params.token,
       resetPasswordExpires: { $gt: Date.now() },
@@ -155,6 +153,8 @@ router.get('/reset/:token', async (req, res) => {
         msg: `Password reset token is invalid or has expired`,
       });
     }
+
+    res.redirect('https://wizardly-kirch-736088.netlify.app');
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
