@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
         },
       });
 
-      let url = `http://localhost:3500/api/confirmation/${vToken.token}`;
+      let url = `https://book-list-full-stack.herokuapp.com/api/confirmation/${vToken.token}`;
 
       let mailOptions = {
         from: config.get('email'),
