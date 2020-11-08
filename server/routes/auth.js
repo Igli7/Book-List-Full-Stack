@@ -154,7 +154,7 @@ router.get('/reset/:token', async (req, res) => {
       });
     }
 
-    res.redirect('https://wizardly-kirch-736088.netlify.app');
+    res.redirect('https://wizardly-kirch-736088.netlify.app/reset');
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
