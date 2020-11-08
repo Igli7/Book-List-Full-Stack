@@ -36,7 +36,9 @@ const BookState = (props) => {
   // Get books
   const getBooks = async () => {
     try {
-      const res = await axios.get('http://localhost:3500/api/books');
+      const res = await axios.get(
+        'https://book-list-full-stack.herokuapp.com/api/books'
+      );
 
       dispatch({
         type: GET_BOOKS,
@@ -60,7 +62,7 @@ const BookState = (props) => {
 
     try {
       const res = await axios.post(
-        'http://localhost:3500/api/books',
+        'https://book-list-full-stack.herokuapp.com/api/books',
         book,
         config
       );
@@ -116,7 +118,9 @@ const BookState = (props) => {
   // Delete book
   const deleteBook = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:3500/api/books/${id}`);
+      const res = await axios.delete(
+        `https://book-list-full-stack.herokuapp.com/api/books/${id}`
+      );
 
       dispatch({
         type: DELETE_BOOK,
@@ -148,7 +152,7 @@ const BookState = (props) => {
 
     try {
       const res = await axios.put(
-        `http://localhost:3500/api/books/${book._id}`,
+        `https://book-list-full-stack.herokuapp.com/api/books/${book._id}`,
         book,
         config
       );

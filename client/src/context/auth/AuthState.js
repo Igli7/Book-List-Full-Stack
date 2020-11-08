@@ -47,7 +47,9 @@ const AuthState = (props) => {
     }
 
     try {
-      const res = await axios.get('http://localhost:3500/api/auth');
+      const res = await axios.get(
+        'https://book-list-full-stack.herokuapp.com/api/auth'
+      );
 
       dispatch({
         type: USER_LOADED,
@@ -77,7 +79,7 @@ const AuthState = (props) => {
     };
     try {
       const res = await axios.post(
-        'http://localhost:3500/api/resend',
+        'https://book-list-full-stack.herokuapp.com/api/resend',
         { email },
         config
       );
@@ -113,7 +115,7 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post(
-        'http://localhost:3500/api/users',
+        'https://book-list-full-stack.herokuapp.com/api/users',
         formData,
         config
       );
@@ -140,7 +142,7 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post(
-        'http://localhost:3500/api/auth',
+        'https://book-list-full-stack.herokuapp.com/api/auth',
         formData,
         config
       );
@@ -169,7 +171,7 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post(
-        'http://localhost:3500/api/auth/recover',
+        'https://book-list-full-stack.herokuapp.com/api/auth/recover',
         email,
         config
       );
@@ -197,7 +199,7 @@ const AuthState = (props) => {
 
     try {
       await axios.post(
-        `http://localhost:3500/api/auth/reset/${initialState.resetToken}`,
+        `https://book-list-full-stack.herokuapp.com/api/auth/reset/${initialState.resetToken}`,
         password,
         config
       );
