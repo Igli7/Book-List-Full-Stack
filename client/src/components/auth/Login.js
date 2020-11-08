@@ -17,7 +17,6 @@ const Login = (props) => {
     error,
     success,
     clearErrors,
-    clearReset,
     isVerified,
     isAuthenticated,
     resendEmail,
@@ -54,7 +53,6 @@ const Login = (props) => {
       }
     }
 
-    clearReset();
     // eslint-disable-next-line
   }, [error, isVerified, props.history, success]);
 

@@ -14,7 +14,7 @@ import Resend from './components/auth/Resend';
 import setAuthToken from './utils/setAuthToken';
 import Reset from './components/auth/Reset';
 import PrivateRoute from './components/routing/PrivateRoute';
-import PrivateRoute1 from './components/routing/PrivateRoute1';
+
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -38,7 +38,7 @@ const App = () => {
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/resend' component={Resend} />
-                  <PrivateRoute1 exact path='/reset' component={Reset} />
+                  <Route exact path='/reset' component={Reset} />
                 </Switch>
               </div>
             </Fragment>
