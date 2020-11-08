@@ -143,7 +143,7 @@ router.post(
 
 router.get('/reset/:token', async (req, res) => {
   try {
-    res.redirect('http://localhost:3000/reset');
+    res.redirect('https://wizardly-kirch-736088.netlify.app/reset');
 
     let user = await User.findOne({
       resetPasswordToken: req.params.token,

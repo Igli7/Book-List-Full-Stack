@@ -45,7 +45,7 @@ router.get(`/:token`, [], async (req, res) => {
           if (err) {
             return res.status(500).send({ msg: err.message });
           }
-          res.redirect('http://localhost:3000/login');
+          res.redirect('https://wizardly-kirch-736088.netlify.app/login');
         });
       });
     });
