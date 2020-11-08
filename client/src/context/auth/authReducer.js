@@ -115,7 +115,7 @@ export default (state, action) => {
 
     case CLEAR_RESET:
       localStorage.removeItem('resetToken');
-      return {};
+      return { ...state };
 
     case SET_TIMEOUT:
       return {
